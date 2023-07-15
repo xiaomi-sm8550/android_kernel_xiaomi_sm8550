@@ -1965,7 +1965,10 @@ static int battery_psy_get_prop(struct power_supply *psy,
 		if (pval->intval == POWER_SUPPLY_STATUS_CHARGING &&
 			bcdev->report_power_absent)
 			pval->intval = POWER_SUPPLY_STATUS_DISCHARGING;
-		break;	
+		break;
+	case POWER_SUPPLY_PROP_CHARGE_COUNTER:
+		pval->intval = pst->prop[prop_id] * 1000;
+		break;		
 	default:
 		pval->intval = pst->prop[prop_id];
 		break;
