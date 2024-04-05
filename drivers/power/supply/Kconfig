@@ -874,6 +874,46 @@ config CHARGER_SURFACE
 	  Microsoft Surface devices, i.e. Surface Pro 7, Surface Laptop 3,
 	  Surface Book 3, and Surface Laptop Go.
 
+config DUAL_FUEL_GAUGE
+	tristate "BQ fuel gauge config"
+	help
+	  Say Y here to enable Bq fuel gauge
+
+config MI_DTPT
+	tristate "mi dtpt config"
+        help
+          Say Y here to enable mi dtpt
+
+config MI_ENABLE_DP
+	tristate "enable or disable displayPort config"
+	help
+	  Say Y here to enable create node to support dp function
+
+config MI_PEN_WIRELESS
+	tristate "mi pen wirless config"
+	help
+	  Say Y here to enable mi pen wireless
+
+config MI_WIRELESS
+	tristate "mi wirless config"
+	help
+	  Say Y here to enable mi wireless
+
+config QTI_POGO_CHG
+	tristate "Xiaomi pogo power supply config"
+	help
+	  Say Y or M here to enable xiaomi power supply
+
+config WIRELESS_REVERSE_CLOSE
+	tristate "mi wirless reverse close"
+	help
+	  Say Y here to disable mi wireless reverse charge
+
+config XM_POGO_DRIVER
+	tristate "Xiaomi pogo power supply config"
+	help
+	  Say Y or M here to enable xiaomi power supply
+
 source "drivers/power/supply/qcom/Kconfig"
 
 endif # POWER_SUPPLY
