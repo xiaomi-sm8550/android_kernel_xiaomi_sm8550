@@ -312,7 +312,6 @@ static ssize_t fts_driver_test_read(struct file *file, char __user *buf,
 				(u8 *)kmalloc(13 * sizeof(u8), GFP_KERNEL);
 			cnt = snprintf(driver_test_buff, PAGE_SIZE,
 				       "{ %08X }\n", ERROR_OP_NOT_ALLOW);
-			copy_to_user(buf, driver_test_buff, cnt);
 			return 0;
 		}
 		chunk = CHUNK_PROC;
