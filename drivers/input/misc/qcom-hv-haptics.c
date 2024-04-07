@@ -353,7 +353,7 @@
 #define CANCEL_DELAY_MS 50
 #define FIFO_PLAY_STOP_DELAY 9
 
-#if defined(CONFIG_TARGET_PRODUCT_SOCRATES)
+#if defined(CONFIG_TARGET_PRODUCT_FUXI)
 #define QCOM_HAPTIC_F0_PROTECT
 #endif
 
@@ -2413,7 +2413,7 @@ static int haptics_init_custom_effect(struct haptics_chip *chip)
 	chip->custom_effect->pattern = NULL;
 	chip->custom_effect->brake = NULL;
 	chip->custom_effect->id = UINT_MAX;
-#if defined(CONFIG_TARGET_PRODUCT_SOCRATES)
+#if defined(CONFIG_TARGET_PRODUCT_FUXI)
 	chip->custom_effect->vmax_mv = 7800;
 #else
 	chip->custom_effect->vmax_mv = chip->config.vmax_mv;
@@ -5397,7 +5397,7 @@ static int haptics_detect_lra_frequency(struct haptics_chip *chip)
 	if (rc < 0)
 		goto restore;
 
-#if defined(CONFIG_TARGET_PRODUCT_SOCRATES)
+#if defined(CONFIG_TARGET_PRODUCT_FUXI)
 	rc = haptics_config_openloop_lra_period(chip, 5714);
 #else
 	rc = haptics_config_openloop_lra_period(chip, chip->config.t_lra_us);
@@ -5413,7 +5413,7 @@ static int haptics_detect_lra_frequency(struct haptics_chip *chip)
 	if (is_haptics_external_powered(chip))
 		vmax_mv = chip->hpwr_voltage_mv - LRA_CALIBRATION_VMAX_HDRM_MV;
 
-#if defined(CONFIG_TARGET_PRODUCT_SOCRATES)
+#if defined(CONFIG_TARGET_PRODUCT_FUXI)
 	rc = haptics_set_vmax_mv(chip, 1400);
 #else
 	rc = haptics_set_vmax_mv(chip, vmax_mv);
