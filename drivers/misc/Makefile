@@ -66,3 +66,4 @@ obj-$(CONFIG_QPNP_MISC)		+= qpnp-misc.o
 obj-$(CONFIG_PROFILER)		+= profiler.o
 obj-$(CONFIG_QRC)		+= qrc/
 obj-$(CONFIG_MI_HARDWARE_ID) += hwid/
+obj-$(CONFIG_PERF_HELPER)       += perf_helper.o
