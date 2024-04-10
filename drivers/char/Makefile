@@ -58,3 +58,4 @@ obj-$(CONFIG_MSM_RDBG)		+= rdbg.o
 obj-$(CONFIG_ADI)		+= adi.o
 obj-$(CONFIG_VIRTIO_FASTRPC) += virtio_fastrpc/
 obj-$(CONFIG_VIRTIO_EAVB)       += virtio_eavb/
+obj-$(CONFIG_XLOGCHAR)      += xlogchar.o
