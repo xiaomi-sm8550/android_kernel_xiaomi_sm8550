@@ -2175,3 +2175,7 @@ source "arch/arm64/gunyah/Kconfig"
 if CRYPTO
 source "arch/arm64/crypto/Kconfig"
 endif
+
+config TARGET_PRODUCT_FUXI
+	bool "Target product is fuxi"
+	default n
