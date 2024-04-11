@@ -285,7 +285,6 @@ static irqreturn_t q6v5_wdog_interrupt(int irq, void *data)
 			strlcpy(modem_crash_reason[crash_num++], msg, MAX_SSR_REASON_LEN);
 	}else {
 		trace_rproc_qcom_event(dev_name(q6v5->dev), "q6v5_wdog", msg);
-	} else {
 		dev_err(q6v5->dev, "watchdog without message\n");
 		dev_err(q6v5->dev, "subsystem failure reason: watchdog without message. \n");
 		//strlcpy(last_modem_sfr_reason, msg, MAX_SSR_REASON_LEN);
