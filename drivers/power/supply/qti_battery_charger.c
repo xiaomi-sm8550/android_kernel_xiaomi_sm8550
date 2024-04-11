@@ -576,7 +576,7 @@ static const char * const POWER_SUPPLY_VENDOR_TEXT[] = {
 	[POWER_SUPPLY_VENDOR_DESAY]		= "DESAY",
 };
 
-static const int xm_prop_map[XM_PROP_MAX] = {}
+static const int xm_prop_map[XM_PROP_MAX] = {};
 
 /* Standard usb_type definitions similar to power_supply_sysfs.c */
 static const char * const power_supply_usb_type_text[] = {
@@ -1039,7 +1039,7 @@ static void handle_message(struct battery_chg_dev *bcdev, void *data,
 			}
 			break;
 		}
-		if (validate_message(resp_msg, len) && resp_msg->property_id < pst->prop_count) {
+		if (validate_message(bcdev, resp_msg, len) && resp_msg->property_id < pst->prop_count) {
 			pst->prop[resp_msg->property_id] = resp_msg->value;
 			ack_set = true;
 		}
@@ -2751,6 +2751,7 @@ static ssize_t bq2597x_chip_ok_show(struct class *c,
 						battery_class);
 	struct psy_state *pst = &bcdev->psy_list[PSY_TYPE_XM];
 	int rc;
+
 	rc = read_property_id(bcdev, pst, XM_PROP_BQ2597X_CHIP_OK);
 	if (rc < 0)
 		return rc;
@@ -2770,7 +2771,8 @@ static ssize_t bq2597x_slave_chip_ok_show(struct class *c,
 	rc = read_property_id(bcdev, pst, XM_PROP_BQ2597X_SLAVE_CHIP_OK);
 	if (rc < 0)
 		return rc;
-		return scnprintf(buf, PAGE_SIZE, "%u\n", pst->prop[XM_PROP_BQ2597X_SLAVE_CHIP_OK]);
+
+	return scnprintf(buf, PAGE_SIZE, "%u\n", pst->prop[XM_PROP_BQ2597X_SLAVE_CHIP_OK]);
 }
 static CLASS_ATTR_RO(bq2597x_slave_chip_ok);
 
