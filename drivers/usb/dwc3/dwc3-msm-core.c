@@ -4896,6 +4896,8 @@ static int dwc3_msm_set_role(struct dwc3_msm *mdwc, enum usb_role role)
 		return 0;
 	}
 
+	pr_info("cur_role:%s new_role:%s, refcnt:%d\n", usb_role_string(cur_role),
+                                      usb_role_string(role), mdwc->refcnt_dp_usb);
 	switch (role) {
 	case USB_ROLE_HOST:
 		mdwc->vbus_active = false;
@@ -4925,8 +4927,6 @@ static int dwc3_msm_set_role(struct dwc3_msm *mdwc, enum usb_role role)
 		mdwc->refcnt_dp_usb = 0;
 		break;
 	}
-	dbg_log_string("new_role:%s refcnt:%d\n",
-		usb_role_string(role), mdwc->refcnt_dp_usb);
 	mutex_unlock(&mdwc->role_switch_mutex);
 
 	dwc3_ext_event_notify(mdwc);
@@ -5887,6 +5887,7 @@ static int dwc3_msm_probe(struct platform_device *pdev)
 	int ret = 0, i;
 	u32 val;
 
+	pr_info("HI miusb begins %s\n", __func__);
 	mdwc = devm_kzalloc(&pdev->dev, sizeof(*mdwc), GFP_KERNEL);
 	if (!mdwc)
 		return -ENOMEM;
@@ -6110,6 +6111,7 @@ static int dwc3_msm_probe(struct platform_device *pdev)
 		}
 	}
 
+	pr_info("HI miusb %s get role-switch OK!\n", __func__);
 	if (of_property_read_bool(node, "extcon")) {
 		ret = dwc3_msm_extcon_register(mdwc);
 		if (ret)
@@ -6177,6 +6179,8 @@ static int dwc3_msm_probe(struct platform_device *pdev)
 		dwc3_ext_event_notify(mdwc);
 
 	mdwc->force_disconnect = false;
+	
+	pr_info("HI miusb %s OK!\n", __func__);
 	return 0;
 
 put_dwc3:
