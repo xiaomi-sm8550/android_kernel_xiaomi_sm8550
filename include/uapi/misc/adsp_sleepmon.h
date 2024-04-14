@@ -43,6 +43,10 @@ enum adspsleepmon_ioctl_panic_cmd {
 	ADSPSLEEPMON_RESET_PANIC_LPM,
     /**< Reset panic on detecting ADSP LPM anomaly to default */
 	ADSPSLEEPMON_RESET_PANIC_LPI,
+	/**< Reset panic on detecting ADSP LPI anomaly to default */
+	ADSPSLEEPMON_ENABLE_PANIC_LPM,
+    /**< Enable panic on detecting ADSP LPM anomaly */
+	ADSPSLEEPMON_ENABLE_PANIC_LPI,
     /**< Reset panic on detecting ADSP LPI anomaly to default */
 	ADSPSLEEPMON_RESET_PANIC_MAX,
 	/**< Max check for Audio ioctl panic command*/
