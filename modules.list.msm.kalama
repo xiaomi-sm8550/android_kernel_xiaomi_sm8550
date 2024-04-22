@@ -15,7 +15,6 @@ rpmh-regulator.ko
 bwmon.ko
 qcom-cpufreq-hw.ko
 sched-walt.ko
-sched-walt-debug.ko
 thermal_pause.ko
 cpu_hotplug.ko
 clk-dummy.ko
@@ -55,8 +54,6 @@ pinctrl-crow.ko
 pinctrl-kalama.ko
 qnoc-kalama.ko
 qnoc-crow.ko
-msm_rtb.ko
-ns.ko
 nvmem_qcom-spmi-sdam.ko
 phy-qcom-ufs.ko
 phy-qcom-ufs-qmp-v4-kalama.ko
