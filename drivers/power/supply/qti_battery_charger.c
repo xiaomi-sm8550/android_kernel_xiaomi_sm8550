@@ -18,6 +18,7 @@
 #include <linux/mutex.h>
 #include <linux/pm_wakeup.h>
 #include <linux/power_supply.h>
+#include <linux/thermal.h>
 #include <linux/reboot.h>
 #include <linux/thermal.h>
 #include <linux/soc/qcom/pmic_glink.h>
@@ -38,6 +39,8 @@
 #define BC_USB_STATUS_SET		0x33
 #define BC_WLS_STATUS_GET		0x34
 #define BC_WLS_STATUS_SET		0x35
+#define BC_XM_STATUS_GET		0x50
+#define BC_XM_STATUS_SET		0x51
 #define BC_SHIP_MODE_REQ_SET		0x36
 #define BC_SHUTDOWN_REQ_SET		0x37
 #define BC_WLS_FW_CHECK_UPDATE		0x40
@@ -46,8 +49,6 @@
 #define BC_WLS_FW_PUSH_BUF_RESP		0x43
 #define BC_WLS_FW_GET_VERSION		0x44
 #define BC_SHUTDOWN_NOTIFY		0x47
-#define BC_XM_STATUS_GET		0x50
-#define BC_XM_STATUS_SET		0x51
 #define BC_HBOOST_VMAX_CLAMP_NOTIFY	0x79
 #define BC_GENERIC_NOTIFY		0x80
 
@@ -313,7 +314,6 @@ enum xm_property_id {
 	XM_PROP_FG_VENDOR_ID,
 	XM_PROP_MAX,
 };
-
 enum fg_venodr{
 	POWER_SUPPLY_VENDOR_BYD = 0,
 	POWER_SUPPLY_VENDOR_COSLIGHT,
@@ -324,7 +324,6 @@ enum fg_venodr{
 	POWER_SUPPLY_VENDOR_LISHEN,
 	POWER_SUPPLY_VENDOR_DESAY,
 };
-
 struct battery_charger_set_notify_msg {
 	struct pmic_glink_hdr	hdr;
 	u32			battery_id;
@@ -412,7 +411,6 @@ struct battery_charger_ship_mode_req_msg {
 struct battery_charger_shutdown_req_msg {
 	struct pmic_glink_hdr	hdr;
 };
-
 struct xm_verify_digest_resp_msg {
 	struct pmic_glink_hdr	hdr;
 	u32			property_id;
@@ -508,7 +506,6 @@ struct battery_chg_dev {
 	u32				*ss_auth_data;
 	char				wls_debug_data[CHG_DEBUG_DATA_LEN];
 	bool				notify_en;
-	bool				error_prop;
 	/*battery auth check for ssr*/
 	bool				battery_auth;
 	/*dual battery authentic flag*/
@@ -518,6 +515,7 @@ struct battery_chg_dev {
 	/*shutdown delay is supported, dtsi config*/
 	bool			shutdown_delay_en;
 	bool			report_power_absent;
+	bool				error_prop;
 };
 
 static const int battery_prop_map[BATT_PROP_MAX] = {
@@ -588,7 +586,7 @@ static const char * const power_supply_usb_type_text[] = {
 
 /* Custom usb_type definitions */
 static const char * const qc_power_supply_usb_type_text[] = {
-	"HVDCP", "HVDCP_3", "HVDCP_3P5", "USB_FLOAT", "HVDCP_3"
+	"HVDCP", "HVDCP_3", "HVDCP_3P5", "USB_FLOAT","HVDCP_3"
 };
 
 /* wireless_type definitions */
